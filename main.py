@@ -56,6 +56,8 @@ def process_function(function: Function): # , *args
         input_argument = f'{argument}'
         user_result = run([executable, "-c", function.user_solution], input=input_argument, capture_output=True, text=True, check=True)
         owner_result = run([executable, "-c", function.owner_solution], input=input_argument, capture_output=True, text=True, check=True)
+        
+        print(argument)
 
         user_results.append(user_result)
         owner_results.append(owner_result)

@@ -53,15 +53,9 @@ def process_function(function: Function): # , *args
     owner_results = []
     user_results = []
     for argument in function.args:
-        with open(f'../static/{function.name}/{file_name}', mode='r+') as file:
-            user_solution = file.read()
-
-        with open(f'../static/{function.name}/solution.py', mode='r+') as file:
-            owner_solution = file.read()
-        
         input_argument = f'{argument}'
-        user_result = run([executable, "-c", user_solution], input=input_argument, capture_output=True, text=True, check=True)
-        owner_result = run([executable, "-c", owner_solution], input=input_argument, capture_output=True, text=True, check=True)
+        user_result = run([executable, "-c", function.user_solution], input=input_argument, capture_output=True, text=True, check=True)
+        owner_result = run([executable, "-c", function.owner_solution], input=input_argument, capture_output=True, text=True, check=True)
 
         user_results.append(user_result)
         owner_results.append(owner_result)
